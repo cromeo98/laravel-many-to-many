@@ -17,13 +17,11 @@
             <p class="card-text">{{$post->content}}</p>
             <h4>Tags</h4>
             <ul>
-
                 @forelse ($post->tags as $tag)
                 <li>{{$tag->name}}</li>
                 @empty
                 <p>Nessun tag associato al post</p>
                 @endforelse
-
             </ul>
             <a href="{{route('admin.posts.index')}}" class="btn btn-primary">Torna alla lista dei post</a>
             <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning">Modifica post</a>
