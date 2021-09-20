@@ -85,8 +85,11 @@ class PostController extends Controller
 
         $newPost->save();
 
-        // all'interno di $newPost->tags "attacco"/"inserisco" l'array dei tags che arrivano dalla pagina create (name="tags[]") in $data (che prende i dati grazie al request->all()));
-        $newPost->tags()->attach($data['tags']);
+        // all'interno di $newPost->tags "attacco"/"inserisco" l'array dei tags che arrivano dalla pagina create (name="tags[]") in $data (che prende i dati grazie al request->all())); lo faccio dopo il save perchè l'attach prende il dato dalla tabella posts
+        if(array_key_exists('tags', $data)){ //se l'array tags è presente in $data salva i dati nella tabella ponte, altrimenti va direttamente alle righe successive
+        // potrei anche scrivere if(isset($data['tags])){}
+            $newPost->tags()->attach($data['tags']);
+        }
         
         return redirect()->route('admin.posts.show', $newPost->id);
     }
