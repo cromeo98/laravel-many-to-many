@@ -55,6 +55,25 @@
 
                     </select>
                 </div>
+                <div class="card-text">
+                    <h4 class="form-label pt-2">Tags</h4>
+                    @foreach ($tags as $tag)
+                    <div class="form-check d-inline-block">
+                        <input name="tags[]" class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag{{$loop->iteration}}" {{-- il loop->iteration aggiunge il valore (numerico) della nostra posizione all'interno del loop del foreach--}}
+                        {{--Se non ci sono errori e la tabella ponte(quindi il db) contiene il $tag->id corrispondente, mi segni checked (ovviamente essendo in unforeach il checked sarà solamente sulle checkbox con l'id corrispondente altrimenti non mi segni checked)--}}
+                        @if(!$errors->any() && $post->tags->contains($tag->id))
+                            checked
+                        {{--se invece non si verifica quanto sopra e all'interno dell'array che ho passato è presente il tag->id mi riporti quanto segnato in precedenza--}}
+                        @elseif(in_array($tag->id, old('tags', [])))
+                            checked
+                        @endif
+                        >
+                        <label class="form-check-label" for="tag{{$loop->iteration}}">
+                          {{$tag->name}}
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
                 <div class="py-2">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{route('admin.posts.index')}}" class="btn btn-warning">Torna indietro</a>

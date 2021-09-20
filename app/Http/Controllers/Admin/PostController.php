@@ -114,8 +114,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post','categories'));
+        return view('admin.posts.edit', compact('post','categories', 'tags'));
     }
 
     /**
@@ -166,6 +167,10 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index',)->with('update', 'Hai modificato il post ' . $post->title);
     }
