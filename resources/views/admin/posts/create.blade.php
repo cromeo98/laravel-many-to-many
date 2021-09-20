@@ -52,8 +52,18 @@
                                 {{$category->name}}
                             </option>    
                         @endforeach
-
                     </select>
+                </div>
+                <div class="card-text">
+                    <h4 class="form-label pt-2">Tags</h4>
+                    @foreach ($tags as $tag)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag">
+                        <label class="form-check-label" for="tag">
+                          {{$tag->name . ' - ' . $tag->id}}
+                        </label>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="py-2">
                     <button type="submit" class="btn btn-primary ">Submit</button>
