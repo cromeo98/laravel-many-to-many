@@ -84,6 +84,9 @@ class PostController extends Controller
         $newPost->slug = $slug;
 
         $newPost->save();
+
+        // all'interno di $newPost->tags "attacco"/"inserisco" l'array dei tags che arrivano dalla pagina create (name="tags[]") in $data (che prende i dati grazie al request->all()));
+        $newPost->tags()->attach($data['tags']);
         
         return redirect()->route('admin.posts.show', $newPost->id);
     }

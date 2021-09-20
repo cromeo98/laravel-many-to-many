@@ -57,16 +57,17 @@
                 <div class="card-text">
                     <h4 class="form-label pt-2">Tags</h4>
                     @foreach ($tags as $tag)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag">
-                        <label class="form-check-label" for="tag">
-                          {{$tag->name . ' - ' . $tag->id}}
+                    <div class="form-check d-inline-block">
+                        <input name="tags[]" class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag{{$loop->iteration}}" {{-- il loop->iteration aggiunge il valore (numerico) della nostra posizione all'interno del loop del foreach--}}
+                        >
+                        <label class="form-check-label" for="tag{{$loop->iteration}}">
+                          {{$tag->name}}
                         </label>
                     </div>
                     @endforeach
                 </div>
                 <div class="py-2">
-                    <button type="submit" class="btn btn-primary ">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{route('admin.posts.index')}}" class="btn btn-warning">Torna indietro</a>
                 </div>
             </form>
