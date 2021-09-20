@@ -180,6 +180,8 @@ class PostController extends Controller
     {
         $post->delete();
 
+        $post->tags()->detach();
+
         return redirect()->route('admin.posts.index')->with('delete', 'Hai eliminato il post ' . $post->title);
     }
 }
