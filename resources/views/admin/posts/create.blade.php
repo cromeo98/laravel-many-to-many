@@ -59,6 +59,9 @@
                     @foreach ($tags as $tag)
                     <div class="form-check d-inline-block">
                         <input name="tags[]" class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag{{$loop->iteration}}" {{-- il loop->iteration aggiunge il valore (numerico) della nostra posizione all'interno del loop del foreach--}}
+                        @if (in_array($tag->id, old('tags', [])))
+                            checked
+                        @endif
                         >
                         <label class="form-check-label" for="tag{{$loop->iteration}}">
                           {{$tag->name}}
